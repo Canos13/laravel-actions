@@ -3,6 +3,20 @@ name: Laravel CI
 on: [push]
 
 jobs:
+  ubuntu-info:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: info OS
+        run: ls -al
+
+  mac-info:
+    runs-on: macos-13
+
+    steps:
+      - name: info OS
+        run: ls -al
+    
   laravel-test:
     runs-on: ubuntu-latest
 
@@ -42,3 +56,11 @@ jobs:
     - name: deploy (LS)
       if: steps.test_laravel.outcome == 'success'
       run: ls
+
+    - name: Artifact
+      uses: actions/upload-artifact@v3
+      if: failure()
+      with: 
+        name: artifacts
+        path: |
+          composer.json
