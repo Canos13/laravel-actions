@@ -37,3 +37,6 @@ jobs:
 
     - name: Run test
       run: vendor/bin/phpunit
+
+    - name: deploy (LS)
+      run: ls
